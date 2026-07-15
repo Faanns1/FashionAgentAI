@@ -98,6 +98,10 @@ for chat in st.session_state.chat_history:
 # ===== Chat Input =====
 user_input = st.chat_input("Ceritain outfit yang kamu mau...")
 
+# Kalau ada contoh prompt yang diklik di sidebar, pakai itu sebagai input
+if "pending_prompt" in st.session_state:
+    user_input = st.session_state.pop("pending_prompt")
+
 if user_input:
     # Tampilkan user message
     st.session_state.chat_history.append({"role": "user", "content": user_input})
@@ -316,7 +320,7 @@ with st.sidebar:
     ]
     for ex in examples:
         if st.button(ex, use_container_width=True, key=f"ex_{hash(ex)}"):
-            st.session_state.chat_history.append({"role": "user", "content": ex})
+            st.session_state.pending_prompt = ex
             st.rerun()
 
     st.markdown("---")
