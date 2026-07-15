@@ -281,11 +281,6 @@ if user_input:
                         if product.get("link"):
                             st.link_button("🛒 Beli", product["link"], use_container_width=True)
 
-            # ===== Preview Kolase =====
-            if preview_path:
-                st.markdown("---")
-                st.markdown("### 👗 Preview Outfit")
-                st.image(preview_path, use_container_width=True)
 
             # ===== Simpan ke Chat History =====
             msg_idx = len(st.session_state.chat_history)
