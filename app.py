@@ -32,16 +32,16 @@ for chat in st.session_state.chat_history:
         st.markdown(chat["content"])
 
         # Tampilkan agent details (expander)
-        if chat.get("agent_outputs"):
-            st.markdown("---")
-            st.markdown("### 🤖 Proses Kerja Agent")
-            for agent_name, agent_data in chat["agent_outputs"].items():
-                icon = agent_data.get("icon", "⏳")
-                label = agent_data.get("label", agent_name)
-                output = agent_data.get("output", "")
-                if output:
-                    with st.expander(f"{icon} {label}", expanded=False):
-                        st.markdown(output)
+        # if chat.get("agent_outputs"):
+        #     st.markdown("---")
+        #     st.markdown("### 🤖 Proses Kerja Agent")
+        #     for agent_name, agent_data in chat["agent_outputs"].items():
+        #         icon = agent_data.get("icon", "⏳")
+        #         label = agent_data.get("label", agent_name)
+        #         output = agent_data.get("output", "")
+        #         if output:
+        #             with st.expander(f"{icon} {label}", expanded=False):
+        #                 st.markdown(output)
 
         # Tampilkan gambar produk
         if chat.get("products"):
@@ -232,7 +232,10 @@ if user_input:
                         "label": label,
                         "output": agent_display,
                     }
-
+                    print("\n" + "=" * 60)
+                    print(f"AGENT : {label}")
+                    print(agent_display)
+                    print("=" * 60)
                 # Capture final output
                 if "final_output" in node_output and node_output["final_output"]:
                     final_output = node_output["final_output"]
@@ -242,21 +245,21 @@ if user_input:
             # ===== Tampilkan Hasil Final =====
             st.markdown(final_output)
 
-# ===== Tampilkan Proses Kerja Agent =====
-            st.markdown("---")
-            st.markdown("### 🤖 Proses Kerja Agent")
+# # ===== Tampilkan Proses Kerja Agent =====
+#             st.markdown("---")
+#             st.markdown("### 🤖 Proses Kerja Agent")
 
-            # Urutkan agent sesuai flow yang benar
-            agent_order = [
-                "planner", "occasion", "wardrobe", "budget",
-                "trend", "recommendation", "product_finder",
-                "explanation", "preview_composer"
-            ]
-            for agent_name in agent_order:
-                if agent_name in agent_outputs:
-                    agent_data = agent_outputs[agent_name]
-                    with st.expander(f"{agent_data['icon']} {agent_data['label']}", expanded=False):
-                        st.markdown(agent_data["output"])
+#             # Urutkan agent sesuai flow yang benar
+#             agent_order = [
+#                 "planner", "occasion", "wardrobe", "budget",
+#                 "trend", "recommendation", "product_finder",
+#                 "explanation", "preview_composer"
+#             ]
+#             for agent_name in agent_order:
+#                 if agent_name in agent_outputs:
+#                     agent_data = agent_outputs[agent_name]
+#                     with st.expander(f"{agent_data['icon']} {agent_data['label']}", expanded=False):
+#                         st.markdown(agent_data["output"])
 
             # ===== Tampilkan Produk =====
             valid_products = [p for p in product_results if p.get("gambar") and "error" not in p]
