@@ -1,0 +1,18 @@
+# ===== Multi-Agent Framework =====
+langgraph>=0.4
+langchain-core>=0.3.66
+langchain-groq>=0.3.3
+groq>=0.25.0
+
+# ===== Frontend =====
+streamlit>=1.40
+
+# ===== Database =====
+sqlalchemy>=2.0
+
+# ===== Image Processing =====
+Pillow>=10.0
+requests>=2.31
+
+# ===== Utilities =====
+python-dotenv>=1.0
